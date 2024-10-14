@@ -36,17 +36,25 @@ def plot_hexagons_on_image(img, hex_size):
     centers = hex_iteration(img, hex_size)
 
     # Plotting the image
-    plt.figure(figsize=(10, 10))
-    plt.imshow(img)
+    fig, ax = plt.subplots(figsize=(10, 10))
+    ax.imshow(img)
 
     # Loop through the centers and plot them
     for row in centers:
         for center in row:
             if center is not None:
                 x, y = center
-                plt.plot(x, y, 'ro',markersize=2)  # Red dots for hexagon centers
-
+                hex_corners = [flat_hex_corner(center, hex_size, i) for i in range(6)]
+                hexagon = plt.Polygon(hex_corners, closed=True, edgecolor='black', facecolor='none', linewidth=0.1)
+                ax.add_patch(hexagon)
     plt.axis('off')  # Hide axes
     plt.show()
+
+def flat_hex_corner(center, size, i):
+    angle_deg = 60 * i
+    angle_rad = np.pi / 180 * angle_deg
+    return (center[0] + size * np.cos(angle_rad),
+            center[1] + size * np.sin(angle_rad))
+
 
 plot_hexagons_on_image(image,13)
