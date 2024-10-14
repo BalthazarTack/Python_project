@@ -91,7 +91,7 @@ def flat_hex_corner(center, size, i):
     Args:
         center (Array): The coordinates of the center point of the hexagone
         size (Float): The size of the hexagones
-        i (Int): Used to set the direction of the angle of the triangle 
+        i (Int): Used to set the direction of the angle of the triangle
             with regard to the center of the hexagone
 
     Returns:
@@ -99,7 +99,10 @@ def flat_hex_corner(center, size, i):
     """
     angle_deg = 60 * i
     angle_rad = np.pi / 180 * angle_deg
-    points =(center[0] + size * np.cos(angle_rad), center[1] + size * np.sin(angle_rad))
+    points = (
+        center[0] + size * np.cos(angle_rad),
+        center[1] + size * np.sin(angle_rad),
+    )
     return points
 
 
