@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "python-project"
+version = "0.1.0"
+description = ""
+authors = ["Tack Balthazar"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Pillow = "^9.0"          
+numpy = "^1.21"          
+matplotlib = "^3.5"     
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
