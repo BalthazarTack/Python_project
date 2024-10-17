@@ -31,7 +31,7 @@ jobs:
         run: poetry install
 
       - name: Run the automated tests
-        run: poetry run coverage run -m pytest project.py
+        run: poetry run coverage run -m pytest test.py
 
       - name: Generate coverage report
         run: |
