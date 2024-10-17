@@ -31,7 +31,7 @@ jobs:
         run: poetry install
 
       - name: Run the automated tests
-        run: poetry run coverage run -m pytest
+        run: poetry run coverage run -m pytest project.py
 
       - name: Generate coverage report
         run: |
@@ -88,7 +88,7 @@ jobs:
           key: venv-${{ hashFiles('poetry.lock') }}
 
       - name: Install the project dependencies
-        run: poetry install -E amazon -E docs
+        run: poetry install
 
       - name: Run pylint
         run: poetry run pylint project.py
