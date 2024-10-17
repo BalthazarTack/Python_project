@@ -37,7 +37,6 @@ def hex_iteration(img, hex_size):
                 y_hex = i * (np.sqrt(3) * hex_size)
             else:
                 y_hex = i * (np.sqrt(3) * hex_size) + (hex_size * np.sqrt(3) / 2)
-
             coord[i][j] = (x_hex, y_hex)
     return coord
 
@@ -104,6 +103,3 @@ def flat_hex_corner(center, size, i):
         center[1] + size * np.sin(angle_rad),
     )
     return points
-
-
-plot_hexagons_on_image(image, 13)
