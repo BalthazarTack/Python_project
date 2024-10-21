@@ -120,4 +120,3 @@ def average_color_in_hex(image, hex_corners):
     return tuple(avg_color.astype(int))
 
 
-plot_hexagons_on_image(outer_wilds,5)
