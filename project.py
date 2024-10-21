@@ -9,7 +9,6 @@ import matplotlib.pyplot as plt
 image = PIL.Image.open("screenshot.jpg")
 pixel = image.load()
 
-outer_wilds = PIL.Image.open("outer_wilds.jpg")
 
 
 def hex_iteration(img, hex_size):
