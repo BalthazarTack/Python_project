@@ -2,11 +2,14 @@
 , and to save it as svg"""
 
 import PIL.Image
+import PIL.ImageDraw
 import numpy as np
 import matplotlib.pyplot as plt
 
 image = PIL.Image.open("screenshot.jpg")
 pixel = image.load()
+
+outer_wilds=PIL.Image.open("outer_wilds.jpg")
 
 
 def hex_iteration(img, hex_size):
@@ -55,27 +58,20 @@ def plot_hexagons_on_image(img, hex_size):
     _, axis = plt.subplots(figsize=(10, 10))
     axis.imshow(img)
 
-    img = np.array(img)
+    img_np = np.array(img)
     # Loop through the centers and plot them
     for row in centers:
         for center in row:
             if center is not None:
                 y_coord, x_coord = center
-                if int(x_coord) == img.shape[0]:
-                    x_coord = img.shape[0] - 1
-                if int(x_coord) == 0:
-                    x_coord = 1
-                if int(y_coord) == 0:
-                    y_coord = 1
-                red_hex = img[int(x_coord)][int(y_coord)][0] / 255
-                green_hex = img[int(x_coord) - 1][int(y_coord)][1] / 255
-                blue_hex = img[int(x_coord) - 1][int(y_coord)][2] / 255
                 hex_corners = [flat_hex_corner(center, hex_size, i) for i in range(6)]
+                colors=average_color_in_hex(img,hex_corners=hex_corners)
+                color_normalized = [c / 255 for c in colors]
                 hexagon = plt.Polygon(
                     hex_corners,
                     closed=True,
                     edgecolor="none",
-                    facecolor=(red_hex, green_hex, blue_hex),
+                    facecolor=color_normalized,
                     linewidth=0.1,
                 )
                 axis.add_patch(hexagon)
@@ -103,3 +99,25 @@ def flat_hex_corner(center, size, i):
         center[1] + size * np.sin(angle_rad),
     )
     return points
+
+def average_color_in_hex(image, hex_corners):
+    np_image = np.array(image)
+    
+
+    mask = PIL.Image.new("L", (image.width, image.height), 0)
+    draw = PIL.ImageDraw.Draw(mask)
+    draw.polygon(hex_corners, fill=255)
+    
+
+    mask_np = np.array(mask)
+    
+
+    hex_pixels = np_image[mask_np == 255]
+
+
+    avg_color = hex_pixels[:, :3].mean(axis=0)
+
+    return tuple(avg_color.astype(int))
+
+
+plot_hexagons_on_image(outer_wilds,5)
