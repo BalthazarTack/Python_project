@@ -42,12 +42,12 @@ def test_flat_hex_corner():
         size = 1
 
         expected_points = [
-            (1.0, 0.0),  # i = 0
-            (0.5, np.sqrt(3) / 2),  # i = 1
-            (-0.5, np.sqrt(3) / 2),  # i = 2
-            (-1.0, 0.0),  # i = 3
-            (-0.5, -np.sqrt(3) / 2),  # i = 4
-            (0.5, -np.sqrt(3) / 2)   # i = 5
+            (1.0, 0.0), 
+            (0.5, np.sqrt(3) / 2),  
+            (-0.5, np.sqrt(3) / 2),  
+            (-1.0, 0.0),  
+            (-0.5, -np.sqrt(3) / 2),  
+            (0.5, -np.sqrt(3) / 2)   
         ]
 
         for i in range(6):
